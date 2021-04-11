@@ -1,19 +1,14 @@
 var express = require('express');
 var router = express.Router();
+const db = require("../db");
+const produto = require("../produtoModel")
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send( [    {
-    nome: "Smash Supremo",
-    preco: "19,90",
-    img: "/img/Smash.png"
-  },
-  {
-    nome: "Cheddar Melt",
-    preco: "17,90",
-    img: "/img/Smash.png"
-  }
-]);
+router.get('/', async function(req, res, next) {
+  console.log(produto)
+  const produtos = await produto.find({});
+  console.log(produtos);
+  res.send(produtos);
 });
 
 module.exports = router;
