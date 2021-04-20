@@ -41,9 +41,11 @@ router.post('/', upload.single('img'), async function (req, res) {
 });
 
 
-router.put("/update/:id", async function (req, res, next) {
+router.put("/update/:id", upload.single('img'), async function (req, res, next) {
+  console.log('onesio', req.body);
   try {
     await produto.findByIdAndUpdate(req.params.id, {
+      img: `/images/${req.file.filename}`,
       $set: req.body
     });
     res.send("Atualizado com sucesso");
